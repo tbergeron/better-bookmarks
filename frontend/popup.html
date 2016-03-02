@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>better-bookmarks</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/css/tether.min.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/app.css" rel="stylesheet">
+    </head>
+    <body>
+        
+        <div class="container">
+
+            <div id="app">
+                <form id="search">
+                    <input name="query" placeholder="Search bookmarks..." v-model="searchQuery" autocomplete="off" />
+                </form>
+                <br />
+
+                <ul>
+                    <li class="bookmark" v-for="bookmark in bookmarks | filterBy searchQuery" transition>
+                        <span><a href="{{bookmark.url}}" title="{{bookmark.url}}">{{bookmark.name}}</a></span>
+                        <a v-on:click="removeBookmark(bookmark)" class="delete" href="#">
+                            <i class="fa fa-minus-circle"></i>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="errors">
+                    <li v-show="!validation.name">Name cannot be empty.</li>
+                    <li v-show="!validation.url">URL cannot be empty.</li>
+                </ul>
+
+                <form id="form" v-on:submit.prevent="addBookmark">
+                    <input placeholder="Title" v-model="newBookmark.name">
+                    <input placeholder="URL" v-model="newBookmark.url">
+                    <input type="submit" value="Add Bookmark">
+                </form>
+
+            </div> <!-- /app -->
+
+        </div> <!-- /container -->
+
+        <script type="text/javascript" src="js/firebase.js"></script>
+        <script type="text/javascript" src="js/vue.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+    </body>
+</html>
