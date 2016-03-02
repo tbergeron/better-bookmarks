@@ -1,0 +1,1 @@
+var firebaseRef = new Firebase('https://bbtestdb.firebaseio.com/');
