@@ -1,11 +1,14 @@
-Vue.debug = true
+Vue.config.debug = true
 var baseURL = 'https://bbtestdb.firebaseio.com/'
 
 // todo: [x] add/delete bookmarks
 // todo: [x] edit bookmarks
 // todo: [x] open first result on enter keypress
-// todo: [ ] keybinding to quickly open extension
-// todo: [ ] star indicate if current page already bookmarked
+// todo: [x] keybinding to quickly open extension
+// todo: [x] star indicate if current page already bookmarked
+// todo: [x] delete confirmation / cancel timer popup
+// todo: [ ] tags support
+// todo: [ ] implement proper child_changed method
 
 function getRandomToken() {
     // E.g. 8 * 32 = 256 bits token
@@ -32,7 +35,7 @@ window.onload = function() {
                 useToken(userid)
             } else {
                 userid = getRandomToken()
-                chrome.storage.sync.set({userid: userid}, function() {
+                chrome.storage.sync.set({ userid: userid }, function() {
                     useToken(userid)
                 })
             }
@@ -87,6 +90,18 @@ window.onload = function() {
                                 return validation[key]
                             })
                         },
+                        starClass: function() {
+                            if (this.bookmarks) {
+                                // todo: OPTIMIZE THIS SHIT
+                                var result = ''
+                                this.bookmarks.forEach(function(bookmark) {
+                                    if (bookmark.url == currentUrl) {
+                                        result = 'star-on'
+                                    }
+                                })
+                                return result
+                            }
+                        }
                     },
                     // methods
                     methods: {
@@ -99,21 +114,25 @@ window.onload = function() {
                         },
                         saveBookmark: function(id, bookmark) {
                             var updatedBookmark = {
+                                id: this.currentObjectInfo[1],
                                 name: this.bookmarkForm.name,
                                 url: this.bookmarkForm.url,
                             }
                             // update vue collection
-                            app.bookmarks.$set(this.currentObjectInfo[0], updatedBookmark);
+                            app.bookmarks.$set(this.currentObjectInfo[0], updatedBookmark)
                             // update firebase collection
-                            Bookmarks.child(this.currentObjectInfo[1]).set(updatedBookmark);
-                            // reset vars
-                            this.bookmarkForm.name = '';
-                            this.bookmarkForm.url = '';
-                            this.currentObjectInfo = [];
-                            $('.edit-form').hide();
+                            var that = this;
+                            Bookmarks.child(this.currentObjectInfo[1]).set(updatedBookmark, function() {
+                                // reset vars
+                                that.bookmarkForm.name = ''
+                                that.bookmarkForm.url = ''
+                                that.currentObjectInfo = []
+                                $('.edit-form').hide()
+                            })
                         },
                         removeBookmark: function(bookmark) {
-                            return Bookmarks.child(bookmark.id).remove()
+                            if (confirm('Are you sure to delete "' + bookmark.name + '"?'))
+                                return Bookmarks.child(bookmark.id).remove()
                         },
                         bookmarkCurrentPage: function() {
                             Bookmarks.push({

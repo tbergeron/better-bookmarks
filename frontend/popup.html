@@ -14,7 +14,7 @@
         <div id="app">
 
             <form id="search" v-on:submit.prevent="openFirstResult">
-                <a class="add-bookmark" v-on:click="bookmarkCurrentPage" href="#">
+                <a class="add-bookmark {{starClass}}" v-on:click="bookmarkCurrentPage" href="#">
                     <i class="fa fa-star"></i>
                 </a>
                 <input id="searchQuery" name="query" placeholder="Search bookmarks..." v-model="searchQuery" autocomplete="off" />

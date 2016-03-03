@@ -1,7 +1,7 @@
 body {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 10px;
-  min-width:200px;
+  font-size: 12px;
+  min-width:220px;
 }
 
 input {
@@ -40,17 +40,22 @@ li:nth-child(odd) {
 
 a.add-bookmark {
   text-align: center;
-  font-size: 15px;
+  font-size: 17px;
   display: inline-block;
   width: 25px;
   float: left;
   margin-top: 1px;
   margin-left: -2px;
+  color: #ccc;
+}
+
+.star-on {
+  color: #198EE1 !important;
 }
 
 #searchQuery {
   display: inline-block;
-  width: 173px;
+  width: 193px;
   margin-top: 3px;
 }
 
@@ -61,7 +66,7 @@ a.add-bookmark {
 .title,
 .url,
 .add-button {
-  width: 200px;
+  width: 220px;
 }
 
 .spacing {
