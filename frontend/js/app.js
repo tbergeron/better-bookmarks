@@ -84,12 +84,6 @@ window.onload = function() {
                                 url: !!this.bookmarkForm.url.trim(),
                             }
                         },
-                        isValid: function() {
-                            var validation = this.validation
-                            return Object.keys(validation).every(function(key) {
-                                return validation[key]
-                            })
-                        },
                         starClass: function() {
                             if (this.bookmarks) {
                                 // todo: OPTIMIZE THIS SHIT
@@ -135,10 +129,23 @@ window.onload = function() {
                                 return Bookmarks.child(bookmark.id).remove()
                         },
                         bookmarkCurrentPage: function() {
-                            Bookmarks.push({
-                                name: currentTitle,
-                                url: currentUrl
+                            var already = false
+
+                            this.bookmarks.forEach(function(bookmark) {
+                                if (bookmark.url == currentUrl) {
+                                    already = bookmark
+                                }
                             })
+
+                            if (already) {
+                                this.removeBookmark(already)
+                            } else {
+                                Bookmarks.push({
+                                    name: currentTitle,
+                                    url: currentUrl
+                                })
+                            }
+
                         },
                         openNewTab: function(bookmark) {
                             chrome.tabs.create({ url: bookmark.url, active: true })
