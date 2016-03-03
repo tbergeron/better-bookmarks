@@ -16,7 +16,7 @@ ul, li {
 }
 
 li.bookmark {
-  padding: 2px 0;
+  padding: 2px 0 0 0;
 }
 
 li.bookmark span {
@@ -24,12 +24,14 @@ li.bookmark span {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 170px;
+  width: 168px;
+  margin-top: 5px;
+  margin-left: 2px;
 }
 
 li i {
   float: right;
-  margin: 3px 3px 0 3px;
+  margin: 6px 3px 0 3px;
 }
 
 li:nth-child(odd) { 

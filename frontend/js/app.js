@@ -1,6 +1,12 @@
 Vue.debug = true
 var baseURL = 'https://bbtestdb.firebaseio.com/'
 
+// todo: [x] add/delete bookmarks
+// todo: [x] edit bookmarks
+// todo: [x] open first result on enter keypress
+// todo: [ ] keybinding to quickly open extension
+// todo: [ ] star indicate if current page already bookmarked
+
 function getRandomToken() {
     // E.g. 8 * 32 = 256 bits token
     var randomPool = new Uint8Array(32)
