@@ -12,7 +12,7 @@
     </head>
     <body>
         <div id="app">
-            <form id="search">
+            <form id="search" v-on:submit.prevent="openFirstResult">
                 <a class="add-bookmark" v-on:click="bookmarkCurrentPage" href="#">
                     <i class="fa fa-star"></i>
                 </a>
@@ -21,13 +21,13 @@
             <div class="spacing"></div>
             <ul>
                 <li class="bookmark" v-for="bookmark in bookmarks | filterBy searchQuery" transition>
-                    <span><a href="{{bookmark.url}}" title="{{bookmark.url}}">{{bookmark.name}}</a></span>
+                    <span><a href="#" v-on:click="openNewTab(bookmark)" title="{{bookmark.url}}">{{bookmark.name}}</a></span>
                     <a v-on:click="removeBookmark(bookmark)" class="delete" href="#">
                         <i class="fa fa-minus-circle"></i>
                     </a>
                 </li>
             </ul>
-            <div class="spacing"></div>
+            <!-- <div class="spacing"></div> -->
 <!--             <ul class="errors">
                 <li v-show="!validation.name">Name cannot be empty.</li>
                 <li v-show="!validation.url">URL cannot be empty.</li>

@@ -34,11 +34,15 @@ a.add-bookmark {
   font-size: 15px;
   display: inline-block;
   width: 25px;
+  float: left;
+  margin-top: 1px;
+  margin-left: -2px;
 }
 
 #searchQuery {
   display: inline-block;
-  width: 170px;
+  width: 173px;
+  margin-top: 3px;
 }
 
 .title,

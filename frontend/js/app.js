@@ -30,7 +30,7 @@ window.onload = function() {
                 });
             }
             function useToken(userid) {
-
+                // logic starts here
                 var baseURL = 'https://bbtestdb.firebaseio.com/'
                 var Bookmarks = new Firebase(baseURL + userid + '/bookmarks')
 
@@ -92,11 +92,18 @@ window.onload = function() {
                                 name: currentTitle,
                                 url: currentUrl
                             })
+                        },
+                        openNewTab: function(bookmark) {
+                            chrome.tabs.create({ url: bookmark.url, active: true })
+                        },
+                        openFirstResult: function() {
+                            // todo: get first result from filter and open in new tab
+                            // this.openNewTab(app.bookmarks[0]);
                         }
                     }
                 }) // end of vue App
 
-            }
-        });
-    });
-}
+            } // end of useToken
+        }); // end of chrome.storage.sync
+    }); // end of chrome.tabs.query
+} // end of onload
