@@ -11,38 +11,35 @@
         <link href="css/app.css" rel="stylesheet">
     </head>
     <body>
-        
-        <div class="container">
-
-            <div id="app">
-                <form id="search">
-                    <input name="query" placeholder="Search bookmarks..." v-model="searchQuery" autocomplete="off" />
-                </form>
-                <br />
-
-                <ul>
-                    <li class="bookmark" v-for="bookmark in bookmarks | filterBy searchQuery" transition>
-                        <span><a href="{{bookmark.url}}" title="{{bookmark.url}}">{{bookmark.name}}</a></span>
-                        <a v-on:click="removeBookmark(bookmark)" class="delete" href="#">
-                            <i class="fa fa-minus-circle"></i>
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="errors">
-                    <li v-show="!validation.name">Name cannot be empty.</li>
-                    <li v-show="!validation.url">URL cannot be empty.</li>
-                </ul>
-
-                <form id="form" v-on:submit.prevent="addBookmark">
-                    <input placeholder="Title" v-model="newBookmark.name">
-                    <input placeholder="URL" v-model="newBookmark.url">
-                    <input type="submit" value="Add Bookmark">
-                </form>
-
-            </div> <!-- /app -->
-
-        </div> <!-- /container -->
+        <div id="app">
+            <form id="search">
+                <a class="add-bookmark" v-on:click="bookmarkCurrentPage" href="#">
+                    <i class="fa fa-star"></i>
+                </a>
+                <input id="searchQuery" name="query" placeholder="Search bookmarks..." v-model="searchQuery" autocomplete="off" />
+            </form>
+            <div class="spacing"></div>
+            <ul>
+                <li class="bookmark" v-for="bookmark in bookmarks | filterBy searchQuery" transition>
+                    <span><a href="{{bookmark.url}}" title="{{bookmark.url}}">{{bookmark.name}}</a></span>
+                    <a v-on:click="removeBookmark(bookmark)" class="delete" href="#">
+                        <i class="fa fa-minus-circle"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="spacing"></div>
+<!--             <ul class="errors">
+                <li v-show="!validation.name">Name cannot be empty.</li>
+                <li v-show="!validation.url">URL cannot be empty.</li>
+            </ul>
+ -->
+ <!--
+         <form id="form" v-on:submit.prevent="addBookmark">
+                <input class="title" placeholder="Title" v-model="newBookmark.name">
+                <input class="url" placeholder="URL" v-model="newBookmark.url">
+                <input class="add-button" type="submit" value="Add Bookmark">
+            </form> -->
+        </div> <!-- /app -->
 
         <script type="text/javascript" src="js/firebase.js"></script>
         <script type="text/javascript" src="js/vue.js"></script>

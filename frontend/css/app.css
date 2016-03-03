@@ -1,16 +1,54 @@
 body {
   font-family: Helvetica, Arial, sans-serif;
-  margin: 25px 0;
   font-size: 10px;
+  min-width:200px;
 }
 
-input[type=text],
-input[type=button] {
+input {
+  /*width: 100%;*/
   padding: 0;
 }
 
-ul {
+ul, li {
   padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+li {
+  padding: 2px 0;
+}
+
+li i {
+  float: right;
+  margin-top: 3px;
+  margin-right: 3px;
+}
+
+li:nth-child(odd) { 
+  background: #f3f3f3; 
+}
+
+a.add-bookmark {
+  text-align: center;
+  font-size: 15px;
+  display: inline-block;
+  width: 25px;
+}
+
+#searchQuery {
+  display: inline-block;
+  width: 170px;
+}
+
+.title,
+.url,
+.add-button {
+  width: 200px;
+}
+
+.spacing {
+  margin-top: 5px;
 }
 
 .delete,
