@@ -15,14 +15,21 @@ ul, li {
   list-style: none;
 }
 
-li {
+li.bookmark {
   padding: 2px 0;
+}
+
+li.bookmark span {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 170px;
 }
 
 li i {
   float: right;
-  margin-top: 3px;
-  margin-right: 3px;
+  margin: 3px 3px 0 3px;
 }
 
 li:nth-child(odd) { 
@@ -43,6 +50,10 @@ a.add-bookmark {
   display: inline-block;
   width: 173px;
   margin-top: 3px;
+}
+
+.edit-form {
+  display: none;
 }
 
 .title,

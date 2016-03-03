@@ -12,33 +12,46 @@
     </head>
     <body>
         <div id="app">
+
             <form id="search" v-on:submit.prevent="openFirstResult">
                 <a class="add-bookmark" v-on:click="bookmarkCurrentPage" href="#">
                     <i class="fa fa-star"></i>
                 </a>
                 <input id="searchQuery" name="query" placeholder="Search bookmarks..." v-model="searchQuery" autocomplete="off" />
             </form>
+
             <div class="spacing"></div>
+
             <ul>
                 <li class="bookmark" v-for="bookmark in bookmarks | filterBy searchQuery" transition>
                     <span><a href="#" v-on:click="openNewTab(bookmark)" title="{{bookmark.url}}">{{bookmark.name}}</a></span>
+
                     <a v-on:click="removeBookmark(bookmark)" class="delete" href="#">
                         <i class="fa fa-minus-circle"></i>
                     </a>
+
+                    <a v-on:click="editBookmark(bookmark)" class="edit" href="#">
+                        <i class="fa fa-pencil"></i>
+                    </a>
                 </li>
             </ul>
-            <!-- <div class="spacing"></div> -->
-<!--             <ul class="errors">
-                <li v-show="!validation.name">Name cannot be empty.</li>
-                <li v-show="!validation.url">URL cannot be empty.</li>
-            </ul>
- -->
- <!--
-         <form id="form" v-on:submit.prevent="addBookmark">
-                <input class="title" placeholder="Title" v-model="newBookmark.name">
-                <input class="url" placeholder="URL" v-model="newBookmark.url">
-                <input class="add-button" type="submit" value="Add Bookmark">
-            </form> -->
+
+            <div class="edit-form">       
+                <div class="spacing"></div>
+                <ul class="errors">
+                    <li v-show="!validation.name">Name cannot be empty.</li>
+                    <li v-show="!validation.url">URL cannot be empty.</li>
+                </ul>
+
+     
+                 <form v-on:submit.prevent="saveBookmark">
+                    <input class="title" placeholder="Title" v-model="bookmarkForm.name">
+                    <input class="url" placeholder="URL" v-model="bookmarkForm.url">
+                    <input class="object_id" type="hidden" v-model="currentObjectId">
+                    <input class="add-button" type="submit" value="Save Bookmark">
+                </form> 
+            </div>
+
         </div> <!-- /app -->
 
         <script type="text/javascript" src="js/firebase.js"></script>
