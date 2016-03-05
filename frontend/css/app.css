@@ -4,9 +4,31 @@ body {
   min-width:220px;
 }
 
-input {
-  /*width: 100%;*/
-  padding: 0;
+#success-indicator {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+}
+
+#success-indicator .inner {
+  position: relative; 
+  left: -50%;
+  color: #1D9F75;
+  font-size: 40px;
+  border: 2px solid #ccc;
+  width: 100px;
+  border-radius: 3px;
+  background-color: #fff;
+  text-align: center;
+}
+
+#success-indicator .inner span {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: -10px;
+  margin-bottom: 5px;
 }
 
 ul, li {
@@ -19,6 +41,10 @@ li.bookmark {
   padding: 2px 0 0 0;
 }
 
+li.bookmark:hover {
+  background-color: #D8D8D8;
+}
+
 li.bookmark span {
   display: inline-block;
   white-space: nowrap;
@@ -29,9 +55,18 @@ li.bookmark span {
   margin-left: 2px;
 }
 
-li i {
+ul li.bookmark:hover a.delete,
+ul li.bookmark:hover a.edit {
+  display: inline-block !important;
+}
+
+a.delete, a.edit {
+  display: none;
+}
+
+li.bookmark a i {
   float: right;
-  margin: 6px 3px 0 3px;
+  margin: -15px 0px 0 6px;
 }
 
 li:nth-child(odd) { 
@@ -50,7 +85,7 @@ a.add-bookmark {
 }
 
 .star-on {
-  color: #198EE1 !important;
+  color: #EFD677 !important;
 }
 
 #searchQuery {
@@ -65,6 +100,7 @@ a.add-bookmark {
 
 .title,
 .url,
+.tags,
 .add-button {
   width: 220px;
 }

@@ -13,8 +13,15 @@
     <body>
         <div id="app">
 
+            <div id="success-indicator">
+                <div class="inner">
+                    <i class="fa fa-check-circle"></i>
+                    <span>Saved!</span>
+                </div>
+            </div>
+
             <form id="search" v-on:submit.prevent="openFirstResult">
-                <a class="add-bookmark {{starClass}}" v-on:click="bookmarkCurrentPage" href="#">
+                <a class="add-bookmark {{starClass}}" v-on:click="bookmarkCurrentPage" title="Toggle bookmark for current page" href="#">
                     <i class="fa fa-star"></i>
                 </a>
                 <input id="searchQuery" name="query" placeholder="Search bookmarks..." v-model="searchQuery" autocomplete="off" />
@@ -24,14 +31,14 @@
 
             <ul>
                 <li class="bookmark" v-for="bookmark in bookmarks | filterBy searchQuery" transition>
-                    <span><a href="#" v-on:click="openNewTab(bookmark)" title="{{bookmark.url}}">{{bookmark.name}}</a></span>
+                    <span><a href="#" v-on:click="openNewTab(bookmark)" title="[{{bookmark.tags}}] {{bookmark.url}}">{{bookmark.name}}</a></span>
 
-                    <a v-on:click="removeBookmark(bookmark)" class="delete" href="#">
-                        <i class="fa fa-minus-circle"></i>
+                    <a v-on:click="editBookmark(bookmark)" class="edit" title="Edit bookmark" href="#">
+                        <i class="fa fa-pencil"></i>
                     </a>
 
-                    <a v-on:click="editBookmark(bookmark)" class="edit" href="#">
-                        <i class="fa fa-pencil"></i>
+                    <a v-on:click="removeBookmark(bookmark)" class="delete" title="Delete bookmark" href="#">
+                        <i class="fa fa-minus-circle"></i>
                     </a>
                 </li>
             </ul>
@@ -47,6 +54,7 @@
                  <form v-on:submit.prevent="saveBookmark">
                     <input class="title" placeholder="Title" v-model="bookmarkForm.name">
                     <input class="url" placeholder="URL" v-model="bookmarkForm.url">
+                    <input class="tags" placeholder="Tags" v-model="bookmarkForm.tags">
                     <input class="object_id" type="hidden" v-model="currentObjectId">
                     <input class="add-button" type="submit" value="Save Bookmark">
                 </form> 
