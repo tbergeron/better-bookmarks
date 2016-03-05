@@ -8,7 +8,8 @@
     "bookmarks",
     "debugger",
     "storage",
-    "tabs"
+    "tabs",
+    "file:///*"
   ],
   "icons": {
     "16": "icon.png",

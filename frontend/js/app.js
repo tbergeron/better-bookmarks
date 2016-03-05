@@ -163,11 +163,18 @@ window.onload = function() {
                             chrome.tabs.create({ url: bookmark.url, active: true })
                         },
                         openFirstResult: function() {
-                            var url = $('ul li.bookmark:nth-child(1) span a').attr('title')
+                            var url = $('ul li.bookmark:nth-child(1) span a').attr('href')
                             this.openNewTab({ url: url })
                         }
                     }
                 }) // end of vue App
+
+                Vue.filter('shrinked', function (str) {
+                    if (str.length > 35) {
+                        return str.substr(0, 20) + '...' + str.substr(str.length-10, str.length);
+                    }
+                    return str;
+                });
 
             } // end of useToken
         }) // end of chrome.storage.sync
