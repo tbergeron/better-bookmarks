@@ -8,25 +8,22 @@ var baseURL = 'https://bbtestdb.firebaseio.com/'
 // todo: [x] star indicate if current page already bookmarked
 // todo: [x] delete confirmation / cancel timer popup
 // todo: [x] tags support
+// todo: [x] show favicons
+// todo: [ ] implement user support / firebase auth? https://www.firebase.com/docs/web/guide/user-auth.html#section-providers
+// todo: [ ] undo instead of confirm?
+// todo: [ ] re-order?
+// todo: [ ] work from a cache?
 // todo: [ ] implement proper child_changed method
-
-function getRandomToken() {
-    var randomPool = new Uint8Array(32)
-    crypto.getRandomValues(randomPool)
-    var hex = ''
-    for (var i = 0; i < randomPool.length; ++i) {
-        hex += randomPool[i].toString(16)
-    }
-    return hex
-}
 
 window.onload = function() {
     $('#searchQuery').focus()
 
+    // getting current page info
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
         var currentUrl = tabs[0].url
         var currentTitle = tabs[0].title
 
+        // getting unique id for browser
         chrome.storage.sync.get('userid', function(items) {
             var userid = items.userid
             if (userid) {
@@ -168,15 +165,25 @@ window.onload = function() {
                         }
                     }
                 }) // end of vue App
-
-                Vue.filter('shrinked', function (str) {
-                    if (str.length > 35) {
-                        return str.substr(0, 20) + '...' + str.substr(str.length-10, str.length);
-                    }
-                    return str;
-                });
-
             } // end of useToken
         }) // end of chrome.storage.sync
     }) // end of chrome.tabs.query
 } // end of onload
+
+// shrink a str...ke this.
+Vue.filter('shrinked', function (str) {
+    if (str.length > 35) {
+        return str.substr(0, 20) + '...' + str.substr(str.length-10, str.length);
+    }
+    return str;
+});
+
+function getRandomToken() {
+    var randomPool = new Uint8Array(32)
+    crypto.getRandomValues(randomPool)
+    var hex = ''
+    for (var i = 0; i < randomPool.length; ++i) {
+        hex += randomPool[i].toString(16)
+    }
+    return hex
+}

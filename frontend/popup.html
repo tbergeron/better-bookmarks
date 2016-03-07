@@ -31,7 +31,10 @@
 
             <ul>
                 <li class="bookmark" v-for="bookmark in bookmarks | filterBy searchQuery" transition>
-                    <span><a href="{{bookmark.url}}" v-on:click="openNewTab(bookmark)" title="[{{bookmark.tags}}] {{ bookmark.url | shrinked }}">{{bookmark.name}}</a></span>
+                    <span>
+                    <img class="favicon" src="http://www.google.com/s2/favicons?domain={{bookmark.url}}" />
+                    <a href="{{bookmark.url}}" v-on:click="openNewTab(bookmark)" title="[{{bookmark.tags}}] {{ bookmark.url | shrinked }}">{{bookmark.name}}</a>
+                    </span>
 
                     <a v-on:click="editBookmark(bookmark)" class="edit" title="Edit bookmark" href="#">
                         <i class="fa fa-pencil"></i>

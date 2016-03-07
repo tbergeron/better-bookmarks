@@ -45,7 +45,12 @@ li.bookmark:hover {
   background-color: #D8D8D8;
 }
 
+li.bookmark img.favicon {
+  margin-right: 2px;
+}
+
 li.bookmark span {
+  color: #0275d8;
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;

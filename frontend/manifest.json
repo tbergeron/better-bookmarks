@@ -1,6 +1,6 @@
 {
   "name": "Better Bookmarks",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Tired of bookmarks that suck?",
   "background": "background.html",
   "permissions": [
